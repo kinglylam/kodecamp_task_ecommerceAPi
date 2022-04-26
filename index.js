@@ -1,17 +1,22 @@
 const express = require("express");
+const bodyParser =require("body-parser");
 const app = express();
 
+
 const  connectDatabase = require("./scr/config/database");
+
+const productRouter = require('./scr/api/routes/product');
+
 connectDatabase(app);
 
-const router = require("./scr/api/routes/product");
-
 app.use(express.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.get("/", (req, res) => {
-    res.send(" <h1> hello world </h1>");
+    res.send(" <h1> ecommerce API </h1>");
 });
 
-app.use("/", router);
+app.use('/product', productRouter);
 
 console.log("waiting for database");
+
