@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
     res.send(" <h1> ecommerce API </h1>");
 });
 
-app.use('/product', productRouter);
+app.use('/api/product', productRouter);
 
 console.log("waiting for database");
 
