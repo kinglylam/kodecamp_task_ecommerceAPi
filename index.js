@@ -18,7 +18,7 @@ app.use('/api/product', productRouter);
 
 console.log("waiting for database");
 
-const PORT = process.env.PORT ?? 5000;
+const PORT = process.env.PORT || 4000;
 const con = async () => {
   try {
     await connectDatabase(process.env.DB_URI);
