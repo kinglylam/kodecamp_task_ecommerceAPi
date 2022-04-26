@@ -7,20 +7,27 @@ const ProductModel = require("../models/product");
     if(!product){
         throw CustomError('bad request',400)
     }
-    res.json({
-        status:'success',
-        data:product
-    });
-}
+    try {
+        res.json({
+            status:'success',
+            data:product
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
 
  const getAllProduct = async (req, res) => {
     const result=await ProductModel.find({});
-    res.json({
-        status:'success',
-        data:result
-    });
- }
-
+    try {
+        res.json({
+            status:'success',
+            data:result
+        });
+    } catch (error) {
+        console.log(error);
+    }
+ };
 
 const getOneProduct = async (req, res) => {
     const {id:_id} = req.params;
@@ -28,10 +35,14 @@ const getOneProduct = async (req, res) => {
     if(!result){
         throw CustomError('Product not found',404)
     }
-    res.json({
-        status:'success',
-        data:result
-    });
+    try {
+        res.json({
+            status:'success',
+            data:result
+        });
+    } catch (error) {
+       console.log(error) ;
+    }
 }
 
 const updateProduct = async (req, res) => {
@@ -41,10 +52,14 @@ const updateProduct = async (req, res) => {
     if(!result){
         throw CustomError('Product not found',404)
     }
-    res.json({
-        status:'success',
-        data:result
-    });
+    try {
+        res.json({
+            status:'success',
+            data:result
+        });
+    } catch (error) {
+        console.log(error);
+    }
 
 }
 const deleteProduct =async (req, res) => {
@@ -53,8 +68,12 @@ const deleteProduct =async (req, res) => {
     if(!result){
         throw CustomError('Product not found',404)
     }
-    res.json({
-        status:'success',
-        data:result});
+    try {
+        res.json({
+            status:'success',
+            data:result});
+    } catch (error) {
+        console.log(error)
+    }
 }
  module.exports = {createProduct, updateProduct, deleteProduct, getOneProduct, getAllProduct}
