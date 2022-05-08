@@ -76,4 +76,24 @@ const deleteProduct =async (req, res) => {
         console.log(error)
     }
 }
- module.exports = {createProduct, updateProduct, deleteProduct, getOneProduct, getAllProduct}
+const filterProduct = async (req, res) => {
+    const {category,name,sortBy="price"}=req.query;
+    const queryBy={}
+    if(category){
+        queryBy.category=category
+    }
+    if(name){
+        queryBy.name={$regex:name,$options:'i'}
+    }
+
+    const result=await ProductModel.find(queryBy).sort({[sortBy]:1});
+    try {
+        res.json({
+            status:'success',
+            data:result
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+ module.exports = {createProduct, updateProduct, deleteProduct, getOneProduct, getAllProduct, filterProduct}
