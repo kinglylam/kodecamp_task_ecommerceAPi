@@ -15,6 +15,8 @@ app.get("/", (req, res) => {
 });
 
 app.use('/api/product', productRouter);
+app.use('/api/users', userRouter);
+
 
 console.log("waiting for database");
 
