@@ -1,22 +1,24 @@
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
 const  connectDatabase = require("./scr/config/database");
-
+const authorize=require("./scr/api/middlewares/authorization");
 const productRouter = require('./scr/api/routes/product');
 const userRouter = require("./scr/api/routes/user");
 
 //app.use(express.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.get("/", (req, res) => {
     res.send(" <h1> ecommerce API </h1>");
 });
 
-app.use('/api/products', productRouter);
+app.use('/api/products', authorize, productRouter);
 app.use('/api/users', userRouter);
 
 console.log("waiting for database");
